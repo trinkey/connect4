@@ -7,6 +7,9 @@ board = [
     [0, 0, 0, 0, 0, 0, 0]
 ]
 
+p1name = input("Enter player 1's Name: ")
+p2name = input("Enter player 2's Name: ")
+
 def printBoard():
     global board
     b = ""
@@ -53,7 +56,7 @@ while True:
     inp = False
     while not inp:
         try:
-            Inp = int(input("Player 1's turn!\nInput a number and press enter."))
+            Inp = int(input(p1name + "'s turn!\nInput a number and press enter."))
             inp = placeTile(1, Inp)
         except:
             print("Bad input, please input a number between 1 and 7.")
@@ -66,7 +69,7 @@ while True:
     inp = False
     while not inp:
         try:
-            Inp = int(input("Player 2's turn!\nInput a number and press enter."))
+            Inp = int(input(p2name + "'s turn!\nInput a number and press enter."))
             inp = placeTile(2, Inp)
         except:
             print("Bad input, please input a number between 1 and 7.")
@@ -80,4 +83,7 @@ while True:
 if not winner:
     print("Tie!")
 else:
-    print("Player " + str(winner) + " wins!")
+  if winner == 1:
+    print(p1name + " wins!")
+  else:
+    print(p2name + " wins!")
