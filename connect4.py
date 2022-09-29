@@ -1,3 +1,6 @@
+numberOfPlayers = 2
+
+import random
 board = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -8,7 +11,8 @@ board = [
 ]
 
 p1name = input("Enter player 1's Name: ")
-p2name = input("Enter player 2's Name: ")
+if numberOfPlayers - 1: p2name = input("Enter player 2's Name: ")
+else: p2name = "Computer"
 
 def printBoard():
     global board
@@ -51,39 +55,51 @@ def checkForWinComp(team):
             if board[i + 3][o] == board[i + 2][o + 1] == board[i + 1][o + 2] == board[i][o + 3] == team: return True
 
 winner = 0
-printBoard()
 while True:
     inp = False
+    printBoard()
     while not inp:
         try:
             Inp = int(input(p1name + "'s turn!\nInput a number and press enter."))
             inp = placeTile(1, Inp)
         except:
             print("Bad input, please input a number between 1 and 7.")
-    printBoard()
     if checkForWinComp(1):
         winner = 1
         break
     if checkForZeros(board) == 0:
         break
-    inp = False
-    while not inp:
-        try:
-            Inp = int(input(p2name + "'s turn!\nInput a number and press enter."))
-            inp = placeTile(2, Inp)
-        except:
-            print("Bad input, please input a number between 1 and 7.")
-    printBoard()
-    if checkForWinComp(2):
-        winner = 2
-        break
-    if checkForZeros(board) == 0:
-        break
-
+    if numberOfPlayers - 1:
+        inp = False
+        printBoard()
+        while not inp:
+            try:
+                Inp = int(input(p2name + "'s turn!\nInput a number and press enter."))
+                inp = placeTile(2, Inp)
+            except:
+                print("Bad input, please input a number between 1 and 7.")
+        if checkForWinComp(2):
+            winner = 2
+            break
+        if checkForZeros(board) == 0:
+            break
+    else:
+        inp = False
+        while not inp:
+            compguess = random.randint(1, 7)
+            inp = placeTile(2, compguess)
+        print("The computer went in column " + str(compguess))
+        if checkForWinComp(2):
+            winner = 2
+            break
+        if checkForZeros(board) == 1:
+            break
+        
+printBoard()
 if not winner:
     print("Tie!")
 else:
-  if winner == 1:
-    print(p1name + " wins!")
-  else:
-    print(p2name + " wins!")
+    if winner == 1:
+        print(p1name + " wins!")
+    else:
+        print(p2name + " wins!")
