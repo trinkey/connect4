@@ -24,7 +24,7 @@ def printBoard():
             elif o == 2: b += "⬜"
             else: b += "  "
         b += "|\n"
-    b += "| 1 2 3 4 5 6 7 |\n-----------------"
+    b += "| 1 2 3 4 5 6 7|\n----------------"
     print(b)
 
 def placeTile(team, column):
