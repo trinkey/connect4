@@ -35,20 +35,17 @@ def checkForZeros(fullboard):
         q += fullboard[i].count(0)
     return q
 
-def checkForWin(pos1, pos2, pos3, pos4, team):
-    return pos1 == pos2 == pos3 == pos4 == team
-
 def checkForWinComp(team):
     for i in range(6):
         for o in range(4):
-            if checkForWin(board[i][o], board[i][o + 1], board[i][o + 2], board[i][o + 3], team): return True
+            if board[i][o] == board[i][o + 1] == board[i][o + 2] == board[i][o + 3] == team: return True
     for i in range(3):
         for o in range(7):
-            if checkForWin(board[i][o], board[i + 1][o], board[i + 2][o], board[i + 3][o], team): return True
+            if board[i][o] == board[i + 1][o] == board[i + 2][o] == board[i + 3][o] == team: return True
     for i in range(3):
         for o in range(4):
-            if checkForWin(board[i][o], board[i + 1][o + 1], board[i + 2][o + 2], board[i + 3][o + 3], team): return True
-            if checkForWin(board[i + 3][o], board[i + 2][o + 1], board[i + 1][o + 2], board[i][o + 3], team): return True
+            if board[i][o] == board[i + 1][o + 1] == board[i + 2][o + 2] == board[i + 3][o + 3] == team: return True
+            if board[i + 3][o] == board[i + 2][o + 1] == board[i + 1][o + 2] == board[i][o + 3] == team: return True
 
 winner = 0
 printBoard()
@@ -79,6 +76,7 @@ while True:
         break
     if checkForZeros(board) == 0:
         break
+
 if not winner:
     print("Tie!")
 else:
